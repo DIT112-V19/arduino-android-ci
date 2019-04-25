@@ -1,20 +1,25 @@
 language: android
-
 jdk: oraclejdk8
 
+# Set environment variables
 env:
     global:
-        - ADB_INSTALL_TIMEOUT=10  # Time out to 10 mins
+        # Set timeout for the Android emulator to come online
+        - ADB_INSTALL_TIMEOUT=10
+        # Set the minimum Android API to support
+        # Note: Not all of them work well with Travis
         - ANDROID_TARGET=android-22
 
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 
 cache:
-  directories:      # Cache all dirs under .gradle folder
+  directories:
+    # Cache all dirs under .gradle folder
     - $HOME/.gradle/daemon       # Cache daemon logs
     - $HOME/.gradle/native       # Cache library downloaded from the gradle dependency
     - $HOME/.gradle/wrapper      # Cache the gradle
+    # Try to reuse previously downloaded Arduino resources
     - $HOME/arduino_ide          # Cache Arduino IDE
     - $HOME/.arduino15/packages/ # Cache Arduino IDE packages
 
