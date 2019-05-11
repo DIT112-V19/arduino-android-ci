@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="top_text">Hello World!</string>
+    <string name="api_key_text">No API key found</string>
+    <string name="api_secret_text">No API Secret found</string>
+
 </resources>
