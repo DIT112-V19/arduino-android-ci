@@ -23,3 +23,16 @@ and if one of them fails it designates the entire build as unsuccessful.
 Each stage of the [job lifecycle](https://docs.travis-ci.com/user/job-lifecycle/) is rather excessively documented
 and explained, however especially the parts regarding the Android application are rather tricky and, sadly, tend
 to break upon the release of new API and SDK versions.
+
+### Compiling the Android app
+The Android application demonstrates how to (not) store secret API keys in a public repository, by keeping
+`gradle.properties` out of the version control system. This means that if you just open the application
+with Android Studio it will fail to compile. To achieve that you need to create a copy of `gradle.properties.no.git`
+in the same directory and name it `gradle.properties`. Then you can insert in the newly created `gradle.properties`
+your secret API keys without having to version control them.
+
+This approach, will also work on TravisCI which creates the `gradle.properties` file and sets the secret API credentials
+(if needed, e.g. for instrumented tests) via environment variables
+[defined in settings](https://docs.travis-ci.com/user/environment-variables/#defining-variables-in-repository-settings).
+Please remember that if you need to make any version controlled changes to your `gradle.properties`, these need to be
+made in its version controlled copy, i.e. `gradle.properties.no.git`.
