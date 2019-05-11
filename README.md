@@ -31,7 +31,7 @@ with Android Studio it will fail to compile. To achieve that you need to create 
 in the same directory and name it `gradle.properties`. Then you can insert in the newly created `gradle.properties`
 your secret API keys without having to version control them.
 
-This approach, will also work pn TravisCI which creates the `gradle.properties` file and sets the secret API credentials
+This approach, will also work on TravisCI which creates the `gradle.properties` file and sets the secret API credentials
 (if needed, e.g. for instrumented tests) via environment variables
 [defined in settings](https://docs.travis-ci.com/user/environment-variables/#defining-variables-in-repository-settings).
 Please remember that if you need to make any version controlled changes to your `gradle.properties`, these need to be
