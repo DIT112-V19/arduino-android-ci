@@ -1,4 +1,6 @@
 #include <Smartcar.h>
+#include "SmartCarRotateableVehicle.h"
+#include "ArduinoExternalEnvironment.h"
 
 const unsigned short LEFT_ODOMETER_PIN = 2;
 const unsigned short RIGHT_ODOMETER_PIN = 3;

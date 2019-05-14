@@ -67,5 +67,6 @@ add_executable(automated_movement_test
 target_include_directories(automated_movement_test PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/test_libs/gmock-gtest
     ${MOCKS_DIR}
+    ${SOURCE_DIR}
 )
 configure_test(automated_movement_test)
