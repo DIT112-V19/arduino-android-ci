@@ -63,6 +63,7 @@ endfunction(configure_test)
 # Automated Movement Unit Tests
 add_executable(automated_movement_test
     ${UT_DIR}/automatedMovements_test.cpp
+    ${SOURCE_DIR}/AutomatedMover.cpp
 )
 target_include_directories(automated_movement_test PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/test_libs/gmock-gtest
