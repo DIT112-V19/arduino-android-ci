@@ -2,9 +2,10 @@
 
 namespace
 {
-constexpr long getAbsolute(long num)
+template<typename AnyNumber>
+constexpr AnyNumber getAbsolute(const AnyNumber& number)
 {
-    return num > 0 ? num : -num;
+    return number < 0 ? -number : number;
 }
 } // namespace
 
@@ -32,12 +33,12 @@ void AutomatedMover::rotate(int degrees, float speed)
         mRotateableVehicle.setAngle(-90);
     }
 
-    unsigned int initialHeading  = mRotateableVehicle.getHeading();
-    bool hasReachedTargetDegrees = false;
+    auto initialHeading          = mRotateableVehicle.getHeading();
+    auto hasReachedTargetDegrees = false;
     while (!hasReachedTargetDegrees)
     {
         mRotateableVehicle.update();
-        int currentHeading = mRotateableVehicle.getHeading();
+        auto currentHeading = mRotateableVehicle.getHeading();
         if (degrees < 0 && currentHeading > initialHeading)
         {
             // If we are turning left and the current heading is larger than the
@@ -53,7 +54,7 @@ void AutomatedMover::rotate(int degrees, float speed)
         }
         // Degrees turned so far is initial heading minus current (initial heading
         // is at least 0 and at most 360. To handle the "edge" cases we substracted or added 360 to currentHeading)
-        int degreesTurnedSoFar  = initialHeading - currentHeading;
+        auto degreesTurnedSoFar = initialHeading - currentHeading;
         hasReachedTargetDegrees = getAbsolute(degreesTurnedSoFar) >= getAbsolute(degrees);
     }
 
@@ -71,8 +72,8 @@ void AutomatedMover::go(long centimeters, float speed)
     mRotateableVehicle.setAngle(0);
     mRotateableVehicle.setSpeed(speed);
 
-    long initialDistance          = mRotateableVehicle.getDistance();
-    bool hasReachedTargetDistance = false;
+    auto initialDistance          = mRotateableVehicle.getDistance();
+    auto hasReachedTargetDistance = false;
     while (!hasReachedTargetDistance)
     {
         mRotateableVehicle.update();
