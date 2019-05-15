@@ -55,7 +55,7 @@ void AutomatedMover::rotate(int degrees, float speed)
         // Degrees turned so far is initial heading minus current (initial heading
         // is at least 0 and at most 360. To handle the "edge" cases we substracted or added 360 to currentHeading)
         auto degreesTurnedSoFar = initialHeading - currentHeading;
-        hasReachedTargetDegrees = getAbsolute(degreesTurnedSoFar) >= getAbsolute(degrees);
+        hasReachedTargetDegrees = getAbsolute(degreesTurnedSoFar) >= static_cast<unsigned int>(getAbsolute(degrees));
     }
 
     mRotateableVehicle.setSpeed(0);
