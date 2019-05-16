@@ -9,6 +9,8 @@ env:
         # Set the minimum Android API to support
         # Note: Not all of them work well with Travis
         - ANDROID_TARGET=android-22
+        # Use a modern C++ compiler
+        - CXX=g++-6
 
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -33,6 +35,17 @@ android:
     - sys-img-armeabi-v7a-$ANDROID_TARGET
     - extra-android-m2repository
     - extra-google-m2repository
+
+compiler:
+    - g++
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-precise-3.8
+    packages:
+      - g++-6
 
 before_script:
     # Launch Android emulator to run the instrumented tests
@@ -67,6 +80,13 @@ script:
     - ./gradlew test --info
     # Run the Android app's instrumented tests
     - ./gradlew connectedAndroidTest
+    # Run the Arduino sketch's unit tests
+    - cd $TRAVIS_BUILD_DIR/arduino/test
+    - mkdir -p build
+    - cd build
+    - cmake ..
+    - make
+    - ctest
     # Build all .ino files for Arduino Mega
     - cd $TRAVIS_BUILD_DIR/arduino
     - build_platform mega2560
